@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Движение Земли — География</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg:#080d19;
+  --panel:#111b2c;
+  --text:#f1f5ff;
+  --muted:#9baac1;
+  --blue:#7bb9ff;
+  --gold:#ffc879;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Manrope,Arial,sans-serif;overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 15% 20%,#193b654d,transparent 40%),
+    radial-gradient(ellipse at 85% 75%,#72502c30,transparent 40%);
+  z-index:-1;
+}
+header{
+  max-width:1200px;margin:auto;padding:27px 6%;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.logo{font-family:Unbounded;font-size:13px;letter-spacing:1px}
+.logo span{color:var(--blue)}
+.header-note{font-size:12px;color:var(--muted);letter-spacing:2px}
+main{max-width:1200px;margin:auto;padding:55px 6% 100px}
+.hero{text-align:center;padding:45px 0 65px}
+.eyebrow{color:var(--blue);font-size:11px;letter-spacing:4px;font-weight:800}
+h1{
+  font-family:Unbounded,sans-serif;
+  font-size:clamp(38px,7vw,78px);line-height:1.13;
+  letter-spacing:-4px;margin:24px 0;
+}
+h1 span{color:var(--blue)}
+.hero p{max-width:620px;margin:0 auto;color:var(--muted);line-height:1.9;font-size:16px}
+.earth-scene{
+  width:220px;height:220px;margin:48px auto 0;
+  position:relative;display:grid;place-items:center;
+}
+.earth{
+  width:125px;height:125px;border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#a7d8ff,#377fc1 40%,#143d77 75%,#071b3b);
+  box-shadow:0 0 45px #4a9eff55,0 0 100px #347dd333;
+  position:relative;overflow:hidden;
+  animation:float 5s ease-in-out infinite;
+}
+.earth:before{
+  content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(ellipse at 35% 35%,#8dc98b 0 13%,transparent 14%),
+  radial-gradient(ellipse at 65% 60%,#70b77a 0 17%,transparent 18%),
+  radial-gradient(ellipse at 25% 75%,#5a9c69 0 12%,transparent 13%);
+  opacity:.9;
+}
+.orbit{position:absolute;width:215px;height:85px;border:1px solid #78a9d855;border-radius:50%;transform:rotate(-25deg)}
+.orbit:after{content:"";position:absolute;width:10px;height:10px;background:var(--gold);border-radius:50%;right:18px;top:10px;box-shadow:0 0 18px var(--gold)}
+@keyframes float{50%{transform:translateY(-10px)}}
+.section-title{text-align:center;margin-bottom:32px}
+.section-title h2{font-family:Unbounded;font-size:25px}
+.section-title p{color:var(--muted);font-size:14px}
+.topics{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.topic{
+  min-height:270px;padding:30px;border:1px solid #293950;
+  border-radius:22px;background:linear-gradient(145deg,#17243a,#0d1524);
+  text-align:left;color:white;cursor:pointer;transition:.3s;
+  position:relative;overflow:hidden;
+}
+.topic:hover{transform:translateY(-7px);border-color:#7bb9ff88}
+.topic .number{font-size:11px;color:var(--blue);letter-spacing:3px}
+.topic h3{font-family:Unbounded;font-size:25px;margin:28px 0 12px}
+.topic p{color:var(--muted);line-height:1.7;font-size:14px;max-width:390px}
+.topic .symbol{position:absolute;right:25px;bottom:20px;font-size:70px;opacity:.8}
+.topic.gold .number{color:var(--gold)}
+.topic.gold:hover{border-color:#ffc87988}
+.topic .arrow{display:inline-block;margin-top:15px;color:var(--blue);font-weight:700}
+.topic.gold .arrow{color:var(--gold)}
+.content{
+  display:none;margin-top:35px;padding:clamp(22px,5vw,48px);
+  background:#101b2b;border:1px solid #2a3b53;border-radius:24px;
+  animation:appear .4s ease;
+}
+.content.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.content h2{font-family:Unbounded;font-size:clamp(25px,4vw,38px);line-height:1.3}
+.content h3{font-size:18px;margin-top:30px}
+.content p,.content li{color:#bdc9d9;line-height:1.9;font-size:15px}
+.content ul{padding-left:22px}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
+.info{
+  background:#1a2940;border-radius:14px;padding:18px;
+}
+.info strong{display:block;color:var(--blue);font-size:18px;margin-bottom:8px}
+.info span{color:var(--muted);font-size:12px;line-height:1.6}
+.gold-text{color:var(--gold)!important}
+.gold-info strong{color:var(--gold)}
+.diagram{
+  margin:30px 0;padding:25px;background:#0a1423;
+  border-radius:18px;text-align:center;border:1px solid #263952;
+}
+.diagram svg{width:100%;max-width:520px;height:auto}
+.diagram-caption{font-size:12px!important;color:#8295ae!important}
+.back{
+  border:1px solid #42556d;background:transparent;color:#dbe8f8;
+  padding:12px 20px;border-radius:30px;cursor:pointer;margin-top:25px;
+}
+.back:hover{background:#263850}
+footer{text-align:center;padding:30px;color:#64748b;font-size:12px;letter-spacing:1px}
+@media(max-width:700px){
+  header{padding:22px 5%}
+  .header-note{display:none}
+  main{padding:25px 5% 70px}
+  .hero{padding:35px 0 50px}
+  h1{letter-spacing:-2px}
+  .topics{grid-template-columns:1fr}
+  .topic{min-height:230px}
+  .info-grid{grid-template-columns:1fr}
+  .earth-scene{transform:scale(.85)}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">GEO<span>·</span>SCIENCE</div>
+  <div class="header-note">ИНТЕРАКТИВНАЯ ГЕОГРАФИЯ</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">ИЗУЧАЕМ НАШУ ПЛАНЕТУ</div>
+    <h1>Движение<br><span>Земли.</span></h1>
+    <p>Почему меняется продолжительность дня и ночи? Что происходит, когда Солнце достигает особого положения на небе? Давай разберёмся.</p>
+    <div class="earth-scene">
+      <div class="orbit"></div>
+      <div class="earth"></div>
+    </div>
+  </section>
+
+  <section id="home">
+    <div class="section-title">
+      <h2>Выбери тему</h2>
+      <p>Нажми на одну из двух карточек, чтобы начать изучение</p>
+    </div>
+    <div class="topics">
+      <button class="topic" onclick="showTopic('solstice')">
+        <div class="number">01 / СОЛНЦЕСТОЯНИЕ</div>
+        <h3>День солнцестояния</h3>
+        <p>Почему бывает самый длинный и самый короткий световой день в году?</p>
+        <span class="arrow">Изучить тему ↗</span>
+        <div class="symbol">☀</div>
+      </button>
+      <button class="topic gold" onclick="showTopic('equinox')">
+        <div class="number">02 / РАВНОДЕНСТВИЕ</div>
+        <h3>День равноденствия</h3>
+        <p>Почему примерно одинаковое количество времени длится день и ночь?</p>
+        <span class="arrow">Изучить тему ↗</span>
+        <div class="symbol">🌗</div>
+      </button>
+    </div>
+  </section>
+
+  <section class="content" id="solstice">
+    <div class="eyebrow">ТЕМА 01 · СОЛНЦЕСТОЯНИЕ</div>
+    <h2>Когда день становится самым длинным или коротким?</h2>
+    <p>Солнцестояние — это момент, когда Солнце в течение года достигает на небе наибольшего или наименьшего полуденного положения относительно небесного экватора. В эти дни в одном полушарии наблюдается самый длинный или самый короткий световой день года.</p>
+
+    <div class="info-grid">
+      <div class="info"><strong>20–21 июня</strong><span>Летнее солнцестояние в Северном полушарии</span></div>
+      <div class="info"><strong>21–22 декабря</strong><span>Зимнее солнцестояние в Северном полушарии</span></div>
+      <div class="info"><strong>23,5°</strong><span>Примерный наклон земной оси</span></div>
+    </div>
+
+    <h3>Почему это происходит?</h3>
+    <p>Земля вращается вокруг Солнца, а её ось наклонена примерно на 23,5°. Поэтому в течение года полушария получают разное количество солнечного света. Когда Северное полушарие сильнее наклонено к Солнцу, там наступает летнее солнцестояние. Через полгода оно наклонено от Солнца — наступает зимнее.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 520 210" role="img" aria-label="Схема наклона Земли и солнечных лучей">
+        <circle cx="75" cy="100" r="38" fill="#ffc879"/>
+        <g stroke="#ffc879" stroke-width="2" opacity=".6">
+          <path d="M120 65 L210 65 M120 85 L210 85 M120 105 L210 105 M120 125 L210 125"/>
+        </g>
+        <circle cx="300" cy="100" r="62" fill="#286da7"/>
+        <path d="M280 45 Q240 85 280 145 Q300 155 315 140 Q285 110 320 65Z" fill="#70b77a"/>
+        <path d="M322 42 L278 158" stroke="#fff" stroke-width="2" stroke-dasharray="5 5"/>
+        <path d="M278 158 L322 42" stroke="#ffc879" stroke-width="3"/>
+        <text x="300" y="190" fill="#c4d5e9" text-anchor="middle" font-size="12">Наклон земной оси</text>
+        <text x="75" y="165" fill="#ffc879" text-anchor="middle" font-size="12">Солнце</text>
+      </svg>
+      <p class="diagram-caption">Упрощённая схема: наклон земной оси влияет на освещённость полушарий.</p>
+    </div>
+
+    <h3>Что важно запомнить?</h3>
+    <ul>
+      <li>В Северном полушарии летнее солнцестояние приходится на июнь.</li>
+      <li>Зимнее солнцестояние приходится на декабрь.</li>
+      <li>В Южном полушарии сезоны противоположны.</li>
+      <li>Солнцестояние связано с наклоном земной оси, а не с тем, что Земля становится ближе или дальше от Солнца.</li>
+    </ul>
+    <button class="back" onclick="goHome()">← Вернуться к выбору темы</button>
+  </section>
+
+  <section class="content" id="equinox">
+    <div class="eyebrow gold-text">ТЕМА 02 · РАВНОДЕНСТВИЕ</div>
+    <h2>Когда день почти равен ночи?</h2>
+    <p>Равноденствие — это момент, когда Солнце пересекает небесный экватор. В эти дни продолжительность дня и ночи почти одинакова во многих местах Земли.</p>
+
+    <div class="info-grid">
+      <div class="info gold-info"><strong>20 марта</strong><span>Весеннее равноденствие в Северном полушарии (примерно)</span></div>
+      <div class="info gold-info"><strong>22–23 сентября</strong><span>Осеннее равноденствие в Северном полушарии (примерно)</span></div>
+      <div class="info gold-info"><strong>2 раза</strong><span>Равноденствие происходит каждый год дважды</span></div>
+    </div>
+
+    <h3>Почему день и ночь почти одинаковые?</h3>
+    <p>Во время равноденствия ни Северное, ни Южное полушарие не наклонено сильнее к Солнцу. Солнечные лучи освещают оба полушария примерно одинаково, поэтому граница дня и ночи проходит почти через полюса.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 520 210" role="img" aria-label="Схема освещения Земли при равноденствии">
+        <circle cx="90" cy="100" r="42" fill="#ffc879"/>
+        <g stroke="#ffc879" stroke-width="2" opacity=".65">
+          <path d="M140 58 L210 58 M140 78 L210 78 M140 98 L210 98 M140 118 L210 118 M140 138 L210 138"/>
+        </g>
+        <circle cx="320" cy="100" r="62" fill="#347eb5"/>
+        <path d="M320 38 A62 62 0 0 0 320 162Z" fill="#17385f"/>
+        <path d="M320 38 A62 62 0 0 1 320 162Z" fill="#5ca5d9"/>
+        <path d="M320 38 L320 162" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="90" y="165" fill="#ffc879" text-anchor="middle" font-size="12">Солнце</text>
+        <text x="320" y="190" fill="#c4d5e9" text-anchor="middle" font-size="12">День и ночь почти равны</text>
+      </svg>
+      <p class="diagram-caption">Упрощённая схема освещения Земли во время равноденствия.</p>
+    </div>
+
+    <h3>Что важно запомнить?</h3>
+    <ul>
+      <li>Равноденствие бывает дважды в год — весной и осенью.</li>
+      <li>В Северном полушарии весеннее равноденствие происходит в марте, осеннее — в сентябре.</li>
+      <li>В Южном полушарии названия сезонов противоположны.</li>
+      <li>День и ночь не везде абсолютно равны: на это влияют атмосфера и видимый размер солнечного диска.</li>
+    </ul>
+    <button class="back" onclick="goHome()">← Вернуться к выбору темы</button>
+  </section>
+</main>
+
+<footer>GEO · SCIENCE — УЗНАВАЙ БОЛЬШЕ О НАШЕЙ ПЛАНЕТЕ</footer>
+
+<script>
+function showTopic(id){
+  document.getElementById('home').style.display='none';
+  document.querySelectorAll('.content').forEach(el=>el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goHome(){
+  document.querySelectorAll('.content').forEach(el=>el.classList.remove('active'));
+  document.getElementById('home').style.display='block';
+  document.getElementById('home').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
